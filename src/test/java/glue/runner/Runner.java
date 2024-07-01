@@ -1,4 +1,4 @@
-package runner;
+/*package runner;
 
 import glue.W;
 import io.cucumber.junit.Cucumber;
@@ -22,3 +22,4 @@ public class Runner {
         W.close();
     }
 }
+*/
