@@ -15,4 +15,3 @@ Feature: Google
     And result stats are displayed
     And number of "results" is more than 1
     And number of "seconds" is more than 0
-

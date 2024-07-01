@@ -1,45 +1,52 @@
+// Account.java
 package account;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Account {
     private String accountNumber;
-    private String name;
-    private List<Transaction> transactions;
+    private String accountHolder;
+    private double balance;
+    private Map<String, Double> transactions;
 
-    public Account(String accountNumber, String name) {
+    public Account(String accountNumber, String accountHolder) {
         this.accountNumber = accountNumber;
-        this.name = name;
-        this.transactions = new ArrayList<>();
+        this.accountHolder = accountHolder;
+        this.balance = 0;
+        this.transactions = new HashMap<>();
     }
 
-    public void deposit(String description, double amount) {
-        transactions.add(new Transaction(description, amount));
+    public void deposit(double amount) {
+        balance += amount;
     }
 
-    public void withdraw(String description, double amount) {
-        transactions.add(new Transaction(description, -amount));
+    public void deposit(String transactionId, double amount) {
+        transactions.put(transactionId, amount);
+        balance += amount;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public void withdraw(double amount) {
+        balance -= amount;
     }
 
-    public String getName() {
-        return name;
+    public void withdraw(String transactionId, double amount) {
+        transactions.put(transactionId, -amount);
+        balance -= amount;
     }
 
-   	
-	public List<Transaction> getTransactions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public double getBalance() {
+        return balance;
+    }
 
-	public String getName1() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
+    public String getStatement() {
+        StringBuilder statement = new StringBuilder();
+        statement.append("Name: ").append(accountHolder).append("\n");
+        statement.append("Account: ").append(accountNumber).append("\n");
+        statement.append("Balance: ").append(balance).append("\n");
+        for (String transactionId : transactions.keySet()) {
+            statement.append(transactionId).append(": ").append(transactions.get(transactionId)).append("\n");
+        }
+        return statement.toString();
+    }
 }

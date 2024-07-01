@@ -1,5 +1,4 @@
 package runner;
-
 import glue.W;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -7,7 +6,6 @@ import org.junit.AfterClass;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-
 @CucumberOptions(
         dryRun = false,
         monochrome = false,
@@ -18,7 +16,8 @@ import org.junit.runner.RunWith;
 )
 public class Runner {
     @AfterClass
-    public static void close() {
-        W.close();
+    public static void tearDown() {
+        W.getInstance().quitDriver();
+
     }
 }
